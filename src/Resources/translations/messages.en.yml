@@ -1,0 +1,5 @@
+bitbag_sylius_product_bundle_plugin:
+    ui:
+        product_bundles: Product bundles
+        product_bundle_header: Product bundle
+        product_bundles_subheader: Manage product bundles

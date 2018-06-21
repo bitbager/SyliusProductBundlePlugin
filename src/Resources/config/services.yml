@@ -1,0 +1,25 @@
+services:
+    bitbag_sylius_product_bundle_plugin.admin_menu_builder:
+        class: BitBag\SyliusProductBundlePlugin\Menu\ProductBundleAdminMenuBuilder
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.main, method: buildMenu }
+
+    bitbag_sylius_product_bundle_plugin.form.type.block:
+        class: BitBag\SyliusProductBundlePlugin\Form\Type\ProductBundleType
+        arguments:
+            - "%bitbag_sylius_product_bundle_plugin.model.product_bundle.class%"
+            - ['bitbag']
+        tags:
+            - { name: form.type }
+
+    bitbag_sylius_product_bundle_plugin.controller.action.admin.product_search:
+        class: BitBag\SyliusProductBundlePlugin\Controller\Action\Admin\ProductSearchAction
+        arguments:
+            - "@bitbag_sylius_product_bundle_plugin.repository.product"
+            - "@fos_rest.view_handler.default"
+        tags:
+            - { name: controller.service_arguments }
+
+    bitbag_sylius_product_bundle_plugin.repository.product:
+        class: BitBag\SyliusProductBundlePlugin\Repository\ProductRepository
+        parent: sylius.repository.product

@@ -1,0 +1,28 @@
+bitbag_sylius_product_bundle_plugin_admin_product_bundle:
+    resource: |
+        alias: bitbag_sylius_product_bundle_plugin.product_bundle
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show']
+        redirect: update
+        grid: bitbag_sylius_product_bundle_plugin_admin_product_bundle
+        permission: true
+        vars:
+            all:
+                header: bitbag_sylius_product_bundle_plugin.ui.product_bundle_header
+                subheader: bitbag_sylius_product_bundle_plugin.ui.product_bundles_subheader
+                templates:
+                    form: BitBagSyliusProductBundlePlugin:ProductBundle:Crud/_form.html.twig
+            index:
+                icon: gift layout
+            route:
+                parameters:
+                    code: $type
+    type: sylius.resource
+
+bitbag_sylius_product_bundle_plugin_admin_ajax_product_by_name_phrase:
+    path: /ajax/products/search-by-name
+    methods: [GET]
+    defaults:
+        _format: json
+        _controller: bitbag_sylius_product_bundle_plugin.controller.action.admin.product_search

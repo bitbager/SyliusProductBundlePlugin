@@ -1,0 +1,6 @@
+sylius:
+    resource: "../../../../vendor/sylius/sylius/app/config/routing_dev.yml"
+
+bitbag_sylius_product_bundle_plugin:
+    resource: "@BitBagSyliusProductBundlePlugin/Resources/config/routing.yml"
+    prefix: /admin

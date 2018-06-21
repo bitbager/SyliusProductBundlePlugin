@@ -1,0 +1,53 @@
+imports:
+    - { resource: services.yml }
+
+sylius_resource:
+    resources:
+        bitbag_sylius_product_bundle_plugin.product_bundle:
+            driver: doctrine/orm
+            classes:
+                model: BitBag\SyliusProductBundlePlugin\Entity\ProductBundle
+                form: BitBag\SyliusProductBundlePlugin\Form\Type\ProductBundleType
+                repository: BitBag\SyliusProductBundlePlugin\Repository\ProductBundleRepository
+
+sylius_grid:
+    grids:
+        bitbag_sylius_product_bundle_plugin_admin_product_bundle:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%bitbag_sylius_product_bundle_plugin.model.product_bundle.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
+            sorting:
+                code: asc
+            limits: [10, 25, 50]
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: ~
+
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, name]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+                bulk:
+                    delete:
+                        type: delete
